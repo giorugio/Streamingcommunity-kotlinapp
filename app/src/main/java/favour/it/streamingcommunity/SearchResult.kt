@@ -17,7 +17,6 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import favour.it.streamingcommunity.api.SearchResult
 
-
 @Composable
 fun SearchResultsList(searchResults: List<SearchResult>) {
     LazyColumn(

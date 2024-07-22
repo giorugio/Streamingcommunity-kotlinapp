@@ -78,14 +78,14 @@ fun HomePage(viewModels: StreamingViewModel) {
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(40.dp),
+                            .padding(20.dp),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         if (!isSearchExpanded) {
                             Text(
-                                text = "StreamingCommunity",
-                                fontSize = 21.sp,
+                                text = "Streaming Community",
+                                fontSize = 20.sp,
                                 fontWeight = FontWeight.Bold
                             )
                         }
@@ -165,7 +165,7 @@ fun HomePage(viewModels: StreamingViewModel) {
                     }
                     error != null -> {
                         Text(
-                            text = "Errore: $error",
+                            text = "Error: $error",
                             color = Color.Red,
                             modifier = Modifier
                                 .align(Alignment.Center)

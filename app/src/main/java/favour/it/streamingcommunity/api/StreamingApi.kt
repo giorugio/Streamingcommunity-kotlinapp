@@ -7,12 +7,13 @@ import retrofit2.http.Url
 
 interface StreamingApi {
 
-    @GET("/search")
+    @GET("/api/search") //con api ricevo il json della query
     suspend fun getSearch(@Query("q") query: String): SearchResponse
 
     @GET
     suspend fun loadDetails(@Url url: String): String
 
-    @POST
-    suspend fun loadPreview(@Url url: String): ItemPreviewResponse
+//    @POST
+//    suspend fun loadPreview(@Url url: String): ItemPreviewResponse
+
 }

@@ -4,7 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class StreamingViewModel : ViewModel() {
 
@@ -19,36 +22,54 @@ class StreamingViewModel : ViewModel() {
     val isLoading: LiveData<Boolean> get() = _isLoading
 
     //errori
-    private val _error = MutableLiveData<String>()
-    val error: LiveData<String> get() = _error
+    private val _error = MutableLiveData<String?>()
+    val error: LiveData<String?> get() = _error
 
     fun search(query: String) {
-        viewModelScope.launch {
-            _isLoading.value = true
-            try {
-                val response = repository.search(query)
-                _searchResponse.value = response
-            } catch (e: Exception) {
-                _error.value = e.message
-            } finally {
-                _isLoading.value = false
-            }
-        }
-    }
+        _isLoading.value = true
+        _error.value = null
 
-    fun loadDetails(url: String) {
-        viewModelScope.launch {
-            _isLoading.value = true
+        CoroutineScope(Dispatchers.IO).launch {
             try {
-                val response = repository.loadDetails(url)
-                // Process response to extract necessary data
-                // Update LiveData objects accordingly
+                val searchResults = repository.search(query)
+                withContext(Dispatchers.Main) {
+                    _searchResponse.value = searchResults
+                    _isLoading.value = false
+                }
             } catch (e: Exception) {
-                _error.value = e.message
-            } finally {
-                _isLoading.value = false
+                withContext(Dispatchers.Main) {
+                    _error.value = e.message
+                    _isLoading.value = false
+                }
             }
         }
     }
+//        viewModelScope.launch {
+//            _isLoading.value = true
+//            try {
+//                val response = repository.search(query)
+//                _searchResponse.value = response
+//            } catch (e: Exception) {
+//                _error.value = e.message
+//            } finally {
+//                _isLoading.value = false
+//            }
+//        }
+//    }
+
+//    fun loadDetails(url: String) {
+//        viewModelScope.launch {
+//            _isLoading.value = true
+//            try {
+//                val response = repository.loadDetails(url)
+//                // Process response to extract necessary data
+//                // Update LiveData objects accordingly
+//            } catch (e: Exception) {
+//                _error.value = e.message
+//            } finally {
+//                _isLoading.value = false
+//            }
+//        }
+//    }
 
 }

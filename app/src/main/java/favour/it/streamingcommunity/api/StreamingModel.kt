@@ -1,31 +1,38 @@
 package favour.it.streamingcommunity.api
 
 data class SearchResponse (
-    //val results: Map<String, SearchResult>,
     val data: List<SearchResult>
 )
 
 data class SearchResult (
-    val id: String,
+    val id: String, //potrebbe essere int
     val slug: String,
     val name: String,
     val type: String,
     val score: String,
-    val sub_ita: Boolean,
+    val sub_ita: String, //potrebbe essere int
     val last_air_date: String?,
-    val seasons_count: Int,
+    val seasons_count: String, //potrebbe essere int
     val images: List<Image>,
-    val url: String
 )
 
 data class Image(
-    val imageable_id: String,
+    val imageable_id: String, //potrebbe essere int
     val imageable_type: String,
     val filename: String,
     val type: String,
     val original_url_field: String?
 )
 
+
+/* questo serve per caricare ora è tolta
+
+le funzioni per caricare sono in
+- streamingApi.kt
+- streamingRepository.kt
+- streamingViewModel.kt
+
+ */
 data class ItemPreviewResponse (
     val type: String,
     val release_date: String,
@@ -48,14 +55,14 @@ data class Title(
     val prime_id: String?,
     val disney_id: String?,
     val release_date: String,
-    val sub_ita: Boolean,
+    val sub_ita: String,
     val seasons: List<Season>,
-    val seasons_count: Int,
+    val seasons_count: String,
     val trailers: List<Trailer>?
 )
 
 data class Season(
-    val number: Int,
+    val number: String,
     val title_id: String,
     val episodes: List<Episode>
 )
@@ -63,9 +70,9 @@ data class Season(
 data class Episode(
     val id: String,
     val name: String,
-    val number: Int,
+    val number: String,
     val plot: String,
-    val duration: Int,
+    val duration: String,
     val images: List<Image>
 )
 
