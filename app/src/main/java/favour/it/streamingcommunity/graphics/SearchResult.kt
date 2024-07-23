@@ -1,7 +1,15 @@
-package favour.it.streamingcommunity
+package favour.it.streamingcommunity.graphics
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
@@ -33,7 +41,10 @@ fun SearchResultItem(result: SearchResult) {
     Card(
         modifier = Modifier
             .padding(vertical = 4.dp)
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .clickable {
+
+            }
     ) {
         Row(
             modifier = Modifier.padding(8.dp),
@@ -41,7 +52,7 @@ fun SearchResultItem(result: SearchResult) {
         ) {
             // Load the image
             val painter = rememberImagePainter(
-                data = result.images.firstOrNull()?.original_url_field,
+                data = result.images.firstOrNull()?.filename,
                 builder = {
                     crossfade(true)
                 }

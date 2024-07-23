@@ -18,7 +18,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         val viewModel = ViewModelProvider(this)[StreamingViewModel::class.java]
-        //val viewmodel: StreamingViewModel = viewModel()
 
         enableEdgeToEdge()
         setContent {
