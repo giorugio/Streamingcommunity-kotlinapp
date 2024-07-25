@@ -1,6 +1,5 @@
 package favour.it.streamingcommunity.api
 
-
 data class SearchResponse (
     val data: List<SearchResult>
 )
